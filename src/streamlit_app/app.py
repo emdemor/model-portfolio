@@ -1,10 +1,14 @@
 import streamlit as st
 
+from streamlit_app.settings import Settings
+
 
 def main() -> None:
-    st.set_page_config(page_title="Supersimple App", page_icon="✨", layout="centered")
+    settings = Settings()
 
-    st.title("Supersimple Streamlit App")
+    st.set_page_config(page_title=settings.app_name, page_icon="✨", layout="centered")
+
+    st.title(settings.app_name)
     st.write(
         "This is a minimal, professional Streamlit app packaged as a Python project."
     )

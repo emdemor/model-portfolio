@@ -11,6 +11,7 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "Your Name", email = "you@example.com" }]
 dependencies = [
+  "pydantic-settings>=2.2.1",
   "streamlit>=1.33.0"
 ]
 
