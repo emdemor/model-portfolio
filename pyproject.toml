@@ -11,7 +11,9 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "Your Name", email = "you@example.com" }]
 dependencies = [
-  "streamlit>=1.33.0"
+  "pydantic-settings>=2.2.1",
+  "streamlit>=1.33.0",
+  "pymongo==3.12.3",
 ]
 
 [project.optional-dependencies]
@@ -22,6 +24,15 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/streamlit_app"]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"streamlit_app/assets" = "streamlit_app/assets"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/assets/**",
+  "streamlit_app/assets/**"
+]
 
 [tool.ruff]
 line-length = 100

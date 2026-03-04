@@ -1,0 +1,23 @@
+FROM python:3.11
+
+WORKDIR /app
+
+ENV PIP_DISABLE_PIP_VERSION_CHECK=on
+
+# Instaling dependencies
+COPY ./requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Installing aplication
+COPY ./.streamlit ./.streamlit
+COPY ./src ./src
+COPY ./pyproject.toml ./
+COPY ./README.md ./
+COPY ./LICENSE.txt ./
+RUN pip install . --no-deps
+
+EXPOSE 8501
+
+RUN chmod -R a+x .
+
+CMD ["streamlit", "run", "src/streamlit_app/app.py"]
