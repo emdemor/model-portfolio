@@ -25,6 +25,15 @@ dev = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/streamlit_app"]
 
+[tool.hatch.build.targets.wheel.shared-data]
+"streamlit_app/assets" = "streamlit_app/assets"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/assets/**",
+  "streamlit_app/assets/**"
+]
+
 [tool.ruff]
 line-length = 100
 target-version = "py311"

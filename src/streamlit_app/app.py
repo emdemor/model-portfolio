@@ -1,3 +1,5 @@
+from importlib import resources
+
 import streamlit as st
 
 from streamlit_app.settings import Settings
@@ -7,6 +9,11 @@ def main() -> None:
     settings = Settings()
 
     st.set_page_config(page_title=settings.app_name, page_icon="✨", layout="centered")
+
+    style_path = resources.files("streamlit_app") / "assets" / "style.css"
+
+    with open(style_path) as css:
+        st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 
     st.title(settings.app_name)
     st.write(
