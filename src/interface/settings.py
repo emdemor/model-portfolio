@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     app_name: str = "Supersimple Streamlit App"
     debug: bool = False
     db_settings: MongoDBSettings = MongoDBSettings()
+    logo_filepath: str = "assets/logo.png"
+    style_filepath: str = "assets/style.css"
 
     model_config = SettingsConfigDict(
         env_prefix="",
