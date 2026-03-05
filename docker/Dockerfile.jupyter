@@ -10,6 +10,7 @@ COPY ./requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Installing aplication
+COPY ./.streamlit ./.streamlit
 COPY ./src /project/src
 COPY ./pyproject.toml /project/pyproject.toml
 COPY ./README.md /project/README.md 
