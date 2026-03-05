@@ -52,4 +52,4 @@ load-vdb:
 	dvc pull
 
 lrun:
-	streamlit run src/streamlit_app/app.py
+	streamlit run app.py

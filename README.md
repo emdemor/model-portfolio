@@ -8,7 +8,7 @@ This is a minimal, professional Streamlit app packaged as a Python project.
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-streamlit run src/streamlit_app/app.py
+streamlit run app.py
 ```
 
 ## Development

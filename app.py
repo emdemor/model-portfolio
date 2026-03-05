@@ -1,5 +1,5 @@
-from streamlit_app.app import main
+from interface.elements.front import front
 
 
 if __name__ == "__main__":
-    main()
+    front()
