@@ -1,5 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap'); 
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400');
+
+:root {
+  --app-font: 'Rajdhani', sans-serif;
+}
+
+html,
+body,
+.stApp,
+.stApp :is(p, span, div, label, button, input, textarea, select, small, strong, em, li, a, h1, h2, h3, h4, h5, h6) {
+  font-family: var(--app-font);
+}
+
+.material-symbols-outlined,
+.material-symbols-rounded,
+.material-symbols-sharp,
+.material-icons,
+[data-testid="stSidebarCollapsedControl"] span,
+[data-testid="stSidebarCollapseButton"] span,
+[data-testid="stExpandSidebarButton"] span,
+[data-testid="stSidebarCollapsedControl"] svg,
+[data-testid="stSidebarCollapseButton"] svg,
+[data-testid="stExpandSidebarButton"] svg,
+[data-testid="stSidebarCollapsedControl"] * {
+  font-family: "Material Symbols Outlined", "Material Symbols Rounded",
+    "Material Symbols Sharp", "Material Icons";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+[data-testid="stIconMaterial"] {
+  font-family: "Material Symbols Outlined", "Material Symbols Rounded",
+    "Material Symbols Sharp", "Material Icons";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
 
 [data-baseweb="select"]:hover,
 [data-baseweb="select"] *:hover {
