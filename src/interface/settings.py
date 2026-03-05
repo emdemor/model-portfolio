@@ -6,6 +6,7 @@ class MongoDBSettings(BaseSettings):
     USER: str
     PASSWORD: str
     DATABASE: str
+    URI: str | None = None
 
     model_config = SettingsConfigDict(env_prefix="MONGODB_")
 
@@ -16,10 +17,20 @@ class AppSettings(BaseSettings):
     style_filepath: str = "assets/style.css"
 
 
+class AuthSettings(BaseSettings):
+    cookie_name: str
+    cookie_key: str
+    cookie_expiry_days: float = 30.0
+    user_collection: str = "users"
+
+    model_config = SettingsConfigDict(env_prefix="AUTH_")
+
+
 class Settings(BaseSettings):
     debug: bool = False
     db_settings: MongoDBSettings = MongoDBSettings()
     app_settings: AppSettings = AppSettings()
+    auth_settings: AuthSettings = AuthSettings()
 
     model_config = SettingsConfigDict(
         env_prefix="",

@@ -7,6 +7,7 @@ from typing import Any
 
 import streamlit as st
 
+from interface.auth import get_authenticator
 import interface.pages
 from interface.settings import Settings
 
@@ -22,11 +23,15 @@ def main() -> None:
     app_names = [get_app_name(label, pages) for label in pages]
     app_name_map = {get_app_name(label, pages): label for label in pages}
 
-    sidebar(pages)
+    authenticator = get_authenticator()
+    sidebar(pages, authenticator)
 
     app_name = st.session_state.get("app_name", "Página Principal")
     if app_name in app_names:
         module_key = app_name_map[app_name]
+        if page_requires_auth(pages[module_key]) and not is_authenticated():
+            st.warning("Faça login para acessar esta aplicação.")
+            return
         pages[module_key].render()
     else:
         st.title(settings.app_name)
@@ -79,12 +84,14 @@ def hide_navigation_sidebar() -> None:
     st.markdown(no_sidebar_style, unsafe_allow_html=True)
 
 
-def sidebar(pages: dict[str, Any]):
+def sidebar(pages: dict[str, Any], authenticator):
     with st.sidebar:
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             logo_path = resources.files("interface") / "assets" / "logo.png"
             st.image(logo_path, width=150)
+
+        render_login(authenticator)
 
     st.sidebar.header("Configurações")
 
@@ -102,6 +109,27 @@ def sidebar(pages: dict[str, Any]):
 
 def update_app_name():
     pass
+
+
+def render_login(authenticator) -> None:
+    auth_status = st.session_state.get("authentication_status")
+    if auth_status:
+        authenticator.logout(location="sidebar")
+        st.caption(f"Logado como: {st.session_state.get('name', '')}")
+        return
+
+    try:
+        authenticator.login(location="sidebar")
+    except Exception as exc:
+        st.error(exc)
+
+
+def is_authenticated() -> bool:
+    return bool(st.session_state.get("authentication_status"))
+
+
+def page_requires_auth(module: Any) -> bool:
+    return bool(getattr(module, "requires_auth", False))
 
 
 def get_pages():

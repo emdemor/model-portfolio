@@ -5,16 +5,12 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=on
 
 USER root
 
-# Instaling dependencies
-COPY ./requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Installing aplication
+# Installing aplication (and deps from pyproject.toml)
 COPY ./src /project/src
 COPY ./pyproject.toml /project/pyproject.toml
-COPY ./README.md /project/README.md 
+COPY ./README.md /project/README.md
 COPY ./LICENSE.txt /project/LICENSE.txt
-RUN pip install . --no-deps
+RUN pip install .
 
 # Getting notebooks
 COPY ./notebooks /project/notebooks
