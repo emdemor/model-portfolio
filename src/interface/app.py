@@ -79,10 +79,11 @@ def hide_navigation_sidebar() -> None:
 
 
 def sidebar(pages: dict[str, Any]):
-    left_co, cent_co, last_co = st.columns(3)
-    with cent_co:
-        logo_path = resources.files("interface") / "assets" / "logo.png"
-        st.sidebar.image(logo_path, width=150)
+    with st.sidebar:
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            logo_path = resources.files("interface") / "assets" / "logo.png"
+            st.image(logo_path, width=150)
 
     st.sidebar.header("Configurações")
 

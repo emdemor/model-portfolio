@@ -5,3 +5,20 @@
 [data-baseweb="select"] *:hover {
   cursor: pointer !important;
 }
+
+[data-testid="stImageContainer"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+[data-testid="stImage"] img {
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+div[data-testid="stImage"] {
+    text-align: center;
+}
