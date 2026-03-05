@@ -123,6 +123,10 @@ def render_login(authenticator) -> None:
     except Exception as exc:
         st.error(exc)
 
+    auth_status = st.session_state.get("authentication_status")
+    if auth_status is False:
+        st.error("Usuário ou senha incorretos.")
+
 
 def is_authenticated() -> bool:
     return bool(st.session_state.get("authentication_status"))
