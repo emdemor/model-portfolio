@@ -2,7 +2,7 @@ from importlib import resources
 
 import streamlit as st
 
-from streamlit_app.settings import Settings
+from interface.settings import Settings
 
 
 def main() -> None:
