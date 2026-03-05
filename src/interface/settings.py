@@ -1,3 +1,4 @@
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -21,7 +22,10 @@ class AuthSettings(BaseSettings):
     cookie_name: str
     cookie_key: str
     cookie_expiry_days: float = 30.0
-    user_collection: str = "users"
+    user_collection: str = Field(
+        default="users",
+        validation_alias="MONGODB_AUTH_COLLECTION",
+    )
 
     model_config = SettingsConfigDict(env_prefix="AUTH_")
 
