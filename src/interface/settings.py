@@ -10,12 +10,16 @@ class MongoDBSettings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="MONGODB_")
 
 
-class Settings(BaseSettings):
-    app_name: str = "Supersimple Streamlit App"
-    debug: bool = False
-    db_settings: MongoDBSettings = MongoDBSettings()
+class AppSettings(BaseSettings):
+    name: str = "Eduardo's Model Portfolio"
     logo_filepath: str = "assets/logo.png"
     style_filepath: str = "assets/style.css"
+
+
+class Settings(BaseSettings):
+    debug: bool = False
+    db_settings: MongoDBSettings = MongoDBSettings()
+    app_settings: AppSettings = AppSettings()
 
     model_config = SettingsConfigDict(
         env_prefix="",

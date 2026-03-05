@@ -42,8 +42,8 @@ def initiate_session_state() -> None:
 
 def page_config(layout: str = "centered", sidebar: str = "auto") -> None:
     st.set_page_config(
-        page_title=settings.app_name,
-        page_icon=settings.logo_filepath,
+        page_title=settings.app_settings.name,
+        page_icon=settings.app_settings.logo_filepath,
         layout=layout,
         initial_sidebar_state=sidebar,
         menu_items={
@@ -55,7 +55,7 @@ def page_config(layout: str = "centered", sidebar: str = "auto") -> None:
 
     hide_navigation_sidebar()
 
-    style_path = resources.files("interface") / "assets" / "style.css"
+    style_path = resources.files("interface") / settings.app_settings.style_filepath
 
     with open(style_path) as css:
         st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
