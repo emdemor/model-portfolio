@@ -1,6 +1,7 @@
 import streamlit as st
 
 name: str = "Página Principal"
+order: int = 0
 
 
 def render():

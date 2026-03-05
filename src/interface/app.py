@@ -11,6 +11,7 @@ import interface.pages
 from interface.settings import Settings
 
 
+DEFAULT_PAGE_ORDER: int = 10_000
 settings = Settings()
 
 
@@ -85,7 +86,7 @@ def sidebar(pages: dict[str, Any]):
 
     st.sidebar.header("Configurações")
 
-    pages_list = [get_app_name(app_name, pages) for app_name in pages]
+    pages_list = get_ordered_page_names(pages)
 
     if pages_list:
         st.sidebar.selectbox(
@@ -122,6 +123,22 @@ def get_app_name(app_name: str, pages: dict[str, Any]):
     if module := pages.get(app_name):
         return module.name
     return app_name
+
+
+def get_page_order(module: Any) -> int:
+    order = getattr(module, "order", None)
+    if isinstance(order, (int, float)):
+        return int(order)
+    return DEFAULT_PAGE_ORDER
+
+
+def get_ordered_page_names(pages: dict[str, Any]) -> list[str]:
+    page_items = []
+    for app_name, module in pages.items():
+        page_items.append((get_page_order(module), get_app_name(app_name, pages)))
+
+    page_items.sort(key=lambda item: (item[0], item[1]))
+    return [name for _, name in page_items]
 
 
 if __name__ == "__main__":
