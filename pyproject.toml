@@ -23,15 +23,15 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/streamlit_app"]
+packages = ["src/interface"]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"streamlit_app/assets" = "streamlit_app/assets"
+"interface/assets" = "interface/assets"
 
 [tool.hatch.build.targets.sdist]
 include = [
   "src/assets/**",
-  "streamlit_app/assets/**"
+  "interface/assets/**"
 ]
 
 [tool.ruff]

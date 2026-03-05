@@ -1,4 +1,4 @@
-from streamlit_app.app import main
+from interface.app import main
 
 
 if __name__ == "__main__":

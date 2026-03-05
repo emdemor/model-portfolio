@@ -5,7 +5,7 @@ class MongoDBSettings(BaseSettings):
     HOST: str
     USER: str
     PASSWORD: str
-    DB: str
+    DATABASE: str
 
     model_config = SettingsConfigDict(env_prefix="MONGODB_")
 
