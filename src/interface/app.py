@@ -42,9 +42,10 @@ def initiate_session_state() -> None:
 
 
 def page_config(layout: str = "centered", sidebar: str = "auto") -> None:
+    logo_path = resources.files("interface") / settings.app_settings.logo_filepath
     st.set_page_config(
         page_title=settings.app_settings.name,
-        page_icon=settings.app_settings.logo_filepath,
+        page_icon=logo_path,
         layout=layout,
         initial_sidebar_state=sidebar,
         menu_items={
