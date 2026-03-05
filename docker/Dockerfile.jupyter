@@ -5,6 +5,9 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=on
 
 USER root
 
+RUN pip install -U cryptography
+RUN pip install streamlit_authenticator ipywidgets jupyterlab_widgets
+
 # Installing aplication (and deps from pyproject.toml)
 COPY ./src /project/src
 COPY ./pyproject.toml /project/pyproject.toml
