@@ -123,7 +123,11 @@ def render() -> None:
     result = st.session_state.get("yt_transcript_result")
 
     if result:
-        st.code(result, language=None)
+        tab_preview, tab_source = st.tabs(["Visualizar", "Markdown"])
+        with tab_preview:
+            st.markdown(result)
+        with tab_source:
+            st.code(result, language=None)
     else:
         st.text_area(
             "Resultado",
