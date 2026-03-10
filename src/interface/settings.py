@@ -30,6 +30,21 @@ class AuthSettings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="AUTH_")
 
 
+class ProxySettings(BaseSettings):
+    username: str | None = None
+    password: str | None = None
+    host: str | None = None
+    port: str | None = None
+
+    model_config = SettingsConfigDict(env_prefix="PROXY_")
+
+    @property
+    def url(self) -> str | None:
+        if all([self.username, self.password, self.host, self.port]):
+            return f"http://{self.username}:{self.password}@{self.host}:{self.port}/"
+        return None
+
+
 class Settings(BaseSettings):
     debug: bool = False
     db_settings: MongoDBSettings = MongoDBSettings()

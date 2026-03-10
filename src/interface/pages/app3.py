@@ -5,6 +5,7 @@ import requests
 import streamlit as st
 from openai import OpenAI
 from youtube_transcript_api import YouTubeTranscriptApi
+from interface.settings import ProxySettings
 from youtube_transcript_api._errors import (
     NoTranscriptFound,
     TranscriptsDisabled,
@@ -29,13 +30,9 @@ def _extract_video_id(url: str) -> str | None:
 
 
 def _build_http_client() -> requests.Session | None:
-    username = os.environ.get("PROXY_USERNAME")
-    password = os.environ.get("PROXY_PASSWORD")
-    host = os.environ.get("PROXY_HOST")
-    port = os.environ.get("PROXY_PORT")
-    if not all([username, password, host, port]):
+    proxy_url = ProxySettings().url
+    if not proxy_url:
         return None
-    proxy_url = f"http://{username}:{password}@{host}:{port}/"
     session = requests.Session()
     session.proxies = {"http": proxy_url, "https": proxy_url}
     return session
