@@ -55,6 +55,3 @@ Two Docker containers: `Dockerfile.frontend` (Streamlit, port 8501) and `Dockerf
 
 ## Instructions
 - Save all memories in @CLAUDE.md
-- Always set `requires_auth = True` when creating a new page module in `src/interface/pages/`
-- Odd-numbered apps (app1, app3, app5...): render title in red — `st.markdown("<h1 style='color:red'>Título</h1>", unsafe_allow_html=True)`
-- Even-numbered apps (app2, app4, app6...): render title in blue — `st.markdown("<h1 style='color:blue'>Título</h1>", unsafe_allow_html=True)`
