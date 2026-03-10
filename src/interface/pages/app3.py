@@ -1,6 +1,7 @@
 import os
 import re
 
+import requests
 import streamlit as st
 from openai import OpenAI
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -27,12 +28,25 @@ def _extract_video_id(url: str) -> str | None:
     return None
 
 
+def _build_http_client() -> requests.Session | None:
+    username = os.environ.get("PROXY_USERNAME")
+    password = os.environ.get("PROXY_PASSWORD")
+    host = os.environ.get("PROXY_HOST")
+    port = os.environ.get("PROXY_PORT")
+    if not all([username, password, host, port]):
+        return None
+    proxy_url = f"http://{username}:{password}@{host}:{port}/"
+    session = requests.Session()
+    session.proxies = {"http": proxy_url, "https": proxy_url}
+    return session
+
+
 def download_captions(url: str, languages: list[str]) -> tuple[str, str]:
     video_id = _extract_video_id(url)
     if not video_id:
         raise ValueError("URL inválida. Não foi possível extrair o ID do vídeo.")
 
-    ytt = YouTubeTranscriptApi()
+    ytt = YouTubeTranscriptApi(http_client=_build_http_client())
     transcript_list = ytt.list(video_id)
 
     try:
